@@ -138,7 +138,7 @@ class StoryMenuState extends MusicBeatState
 		difficultySelectors = new FlxGroup();
 		add(difficultySelectors);
 
-		leftArrow = new FlxSprite(grpWeekText.members[0].x + grpWeekText.members[0].width + 10, grpWeekText.members[0].y + 10);
+		leftArrow = new FlxSprite(grpWeekText.members[0].x + 10, grpWeekText.members[0].y + grpWeekText.members[0].height + 10 + 50);
 		leftArrow.frames = ui_tex;
 		leftArrow.animation.addByPrefix('idle', "arrow left");
 		leftArrow.animation.addByPrefix('press', "arrow push left");
@@ -171,6 +171,7 @@ class StoryMenuState extends MusicBeatState
 
 		var tracksSprite:FlxSprite = new FlxSprite(FlxG.width * 0.07, bgSprite.y + 425).loadGraphic(Paths.image('Menu_Tracks'));
 		tracksSprite.antialiasing = ClientPrefs.globalAntialiasing;
+		tracksSprite.y = tracksSprite.y - 3.00;
 		add(tracksSprite);
 
 		txtTracklist = new FlxText(FlxG.width * 0.05, tracksSprite.y + 60, 0, "", 32);
@@ -181,6 +182,9 @@ class StoryMenuState extends MusicBeatState
 		// add(rankText);
 		add(scoreText);
 		add(txtWeekTitle);
+		txtWeekTitle.y = scoreText.y + 10;
+		scoreText.y = txtTracklist.y + 50 + 40;
+		//scoreText.screenCenter(Y);
 
 		changeWeek();
 		changeDifficulty();
@@ -352,7 +356,7 @@ class StoryMenuState extends MusicBeatState
 			sprDifficulty.loadGraphic(newImage);
 			sprDifficulty.x = leftArrow.x + 60;
 			sprDifficulty.x += (308 - sprDifficulty.width) / 3;
-			sprDifficulty.alpha = 0;
+			sprDifficulty.alpha = 0.1;
 			sprDifficulty.y = leftArrow.y - 15;
 
 			if(tweenDifficulty != null) tweenDifficulty.cancel();
@@ -385,7 +389,9 @@ class StoryMenuState extends MusicBeatState
 
 		var leName:String = leWeek.storyName;
 		txtWeekTitle.text = leName.toUpperCase();
-		txtWeekTitle.x = FlxG.width - (txtWeekTitle.width + 10);
+		txtWeekTitle.x = scoreText.x;
+		txtWeekTitle.y = scoreText.y + 25;
+		//txtWeekTitle.x = FlxG.width - (txtWeekTitle.width + 10);
 
 		var bullShit:Int = 0;
 
@@ -396,7 +402,7 @@ class StoryMenuState extends MusicBeatState
 			if (item.targetY == Std.int(0) && unlocked)
 				item.alpha = 1;
 			else
-				item.alpha = 0.6;
+				item.alpha = 0.1;
 			bullShit++;
 		}
 
@@ -407,6 +413,7 @@ class StoryMenuState extends MusicBeatState
 		} else {
 			bgSprite.loadGraphic(Paths.image('menubackgrounds/menu_' + assetName));
 		}
+		
 		PlayState.storyWeek = curWeek;
 
 		CoolUtil.difficulties = CoolUtil.defaultDifficulties.copy();

@@ -91,7 +91,6 @@ class FreeplayState extends MusicBeatState
 		WeekData.loadTheFirstEnabledMod();
 
 		/*		//KIND OF BROKEN NOW AND ALSO PRETTY USELESS//
-
 		var initSonglist = CoolUtil.coolTextFile(Paths.txt('freeplaySonglist'));
 		for (i in 0...initSonglist.length)
 		{
@@ -113,8 +112,9 @@ class FreeplayState extends MusicBeatState
 		{
 			var songText:Alphabet = new Alphabet(90, 320, songs[i].songName, true);
 			songText.isMenuItem = true;
-			songText.targetY = i - curSelected;
+			//songText.targetY = i - curSelected;
 			grpSongs.add(songText);
+			
 
 			var maxWidth = 980;
 			if (songText.width > maxWidth)
@@ -122,18 +122,18 @@ class FreeplayState extends MusicBeatState
 				songText.scaleX = maxWidth / songText.width;
 			}
 			songText.snapToPosition();
-
 			Paths.currentModDirectory = songs[i].folder;
 			var icon:HealthIcon = new HealthIcon(songs[i].songCharacter);
-			icon.sprTracker = songText;
+			//icon.sprTracker = songText;
+			//icon.screenCenter(Y);
 
 			// using a FlxGroup is too much fuss!
 			iconArray.push(icon);
-			add(icon);
+			add(icon); //*/
 
-			// songText.x += 40;
+			 songText.x += 40;
 			// DONT PUT X IN THE FIRST PARAMETER OF new ALPHABET() !!
-			// songText.screenCenter(X);
+			
 		}
 		WeekData.setDirectoryFromWeek();
 
@@ -168,17 +168,13 @@ class FreeplayState extends MusicBeatState
 		// JUST DOIN THIS SHIT FOR TESTING!!!
 		/* 
 			var md:String = Markdown.markdownToHtml(Assets.getText('CHANGELOG.md'));
-
 			var texFel:TextField = new TextField();
 			texFel.width = FlxG.width;
 			texFel.height = FlxG.height;
 			// texFel.
 			texFel.htmlText = md;
-
 			FlxG.stage.addChild(texFel);
-
 			// scoreText.textField.htmlText = md;
-
 			trace(md);
 		 */
 
@@ -190,7 +186,7 @@ class FreeplayState extends MusicBeatState
 		var leText:String = "Press SPACE to listen to the Song / Press CTRL to open the Gameplay Changers Menu / Press RESET to Reset your Score and Accuracy.";
 		var size:Int = 16;
 		#else
-		var leText:String = "Press CTRL to open the Gameplay Changers Menu / Press RESET to Reset your Score and Accuracy.";
+		var leText:String = "Press CTRL to open the Gameplay Changers Menu / Press the reset (default: r) key to Reset your Score and Accuracy.";
 		var size:Int = 18;
 		#end
 		var text:FlxText = new FlxText(textBG.x, textBG.y + 4, FlxG.width, leText, size);
@@ -220,13 +216,11 @@ class FreeplayState extends MusicBeatState
 	{
 		if (songCharacters == null)
 			songCharacters = ['bf'];
-
 		var num:Int = 0;
 		for (song in songs)
 		{
 			addSong(song, weekNum, songCharacters[num]);
 			this.songs[this.songs.length-1].color = weekColor;
-
 			if (songCharacters.length != 1)
 				num++;
 		}
@@ -460,7 +454,7 @@ class FreeplayState extends MusicBeatState
 
 		for (i in 0...iconArray.length)
 		{
-			iconArray[i].alpha = 0.6;
+			iconArray[i].alpha = 0.01;
 		}
 
 		iconArray[curSelected].alpha = 1;
