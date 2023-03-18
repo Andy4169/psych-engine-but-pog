@@ -114,14 +114,14 @@ class FreeplayState extends MusicBeatState
 			songText.isMenuItem = true;
 			//songText.targetY = i - curSelected;
 			grpSongs.add(songText);
-			
+			songText.x = FlxG.width / 2;
 
 			var maxWidth = 980;
 			if (songText.width > maxWidth)
 			{
 				songText.scaleX = maxWidth / songText.width;
 			}
-			songText.snapToPosition();
+			//songText.snapToPosition();
 			Paths.currentModDirectory = songs[i].folder;
 			var icon:HealthIcon = new HealthIcon(songs[i].songCharacter);
 			//icon.sprTracker = songText;
@@ -129,9 +129,9 @@ class FreeplayState extends MusicBeatState
 
 			// using a FlxGroup is too much fuss!
 			iconArray.push(icon);
-			add(icon); //*/
-
-			 songText.x += 40;
+			add(icon);
+			songText.x = FlxG.width / 2;
+			//songText.screenCenter(X);
 			// DONT PUT X IN THE FIRST PARAMETER OF new ALPHABET() !!
 			
 		}
