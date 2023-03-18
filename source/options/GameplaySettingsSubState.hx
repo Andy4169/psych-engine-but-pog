@@ -40,6 +40,12 @@ class GameplaySettingsSubState extends BaseOptionsMenu
 			'bool',
 			false);
 		addOption(option);
+		var option:Option = new Option('Mods Enabled',
+		'Check this if you want mods\nto be enabled.',
+		'modsEnabled',
+		'bool',
+		false);
+		addOption(option);
 
 		//I'd suggest using "Downscroll" as an example for making your own option since it is the simplest here
 		var option:Option = new Option('Downscroll', //Name
